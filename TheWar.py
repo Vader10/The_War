@@ -291,7 +291,7 @@ def home():
     print("2.Multiplayer")
     print("3.shop")
     print("tip: if you find a bug, tell me!\nbut, if you're not sure it's a bug, it may not be a bug.")
-    choice=int(input("Your choice(1,2): "))
+    choice=int(input("Your choice(1,2,3): "))
     if(choice==1):
         singlePlayer()
     elif choice==3:

@@ -139,7 +139,7 @@ def multiplayer():
         else:
             print(places[i],end="Player ")
         print(sta[j])
-def loopSingle(dchancperc):
+def singlePlayer(dchancperc):
     global coins
     global dchance
     name=input("Name:")
@@ -248,17 +248,6 @@ def loopSingle(dchancperc):
         print("computer hp:",computer)
 
 
-            
-def singlePlayer():
-    global dchance
-    global coins
-    newload=input("New game or load")
-    if(newload.lower()=="load" or newload.lower()=="load game"):
-        code=float(input("code(copy EXACTLY what it printed out):"))
-        codet=float(input())
-        dchance=int(codet)
-        coins=int(code)
-    loopSingle(dchance)
 def shop():
     global coins
     global dchance
@@ -272,12 +261,22 @@ def shop():
         if(coins>=100):
             coins-=100
             dchance+=5
+            print()
         else:
             print("You don't have enough money!")
             home()
+            print("\n")
+        shop()
     elif(choice==2):
         home()
+        print()
+    else:
+        print("INVALID!!!")
+        print()
+        shop()
 def home():
+    t.sleep(1)
+    print("\n")
     global coins
     global dchance
     if(coins<0):
@@ -287,17 +286,29 @@ def home():
     print(r.randint(1000,9999))
     print(dchance,end='.')
     print(r.randint(1000,9999))
-    print("1.Singleplayer")
-    print("2.Multiplayer")
-    print("3.shop")
+    print("1. Singleplayer")
+    print("2. Multiplayer")
+    print("3. Shop")
+    print("4. Load Game")
+    print("5. Exit Game:")
     print("tip: if you find a bug, tell me!\nbut, if you're not sure it's a bug, it may not be a bug.")
-    choice=int(input("Your choice(1,2,3): "))
+    choice=int(input("Your choice(1,2,3,4,5): "))
     if(choice==1):
-        singlePlayer()
+        singlePlayer(dchance)
     elif choice==3:
         shop()
     elif choice==2:
         multiplayer()
-    
+    elif choice==4:
+        code=float(input("code (copy EXACTLY what it printed out) : "))
+        codet=float(input())
+        dchance=int(codet)
+        coins=int(code)
+    elif choice==5:
+        sure=input("Are you sure you want to exit? (y/n) ")
+        if sure=='y':
+            exit()
+        if sure!='n':
+            print("INVALID!!!")
     home()
 home()

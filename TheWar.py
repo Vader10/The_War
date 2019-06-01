@@ -5,7 +5,6 @@ dchance=5
 coins=0
 def multiplayer():
     sta=[]
-    print("The multiplayer version of this game is weird. You can hit people even when you die.")
     playernumber=2
     for letter in s:
         print(letter,end='')
@@ -23,6 +22,8 @@ def multiplayer():
     done=False
     while done==False:
         for i in range(playernumber):
+            if(playerhealth[i]<=0):
+                continue
             crichance=[5,5,5,5,5]
             print("Player ",end='')
             print(i+1,end='')
@@ -32,18 +33,18 @@ def multiplayer():
             print("believes in his/her luck?(y/n)")
             luck=input()
             if(luck=="y"):
-                num=input("Guess a number(0,100):")
+                num=int(input("Guess a number(0,100):"))
                 ans=r.randint(0,100)
                 comc=r.randint(0,100)
                 print("Computer chooses ",end='')
                 print(comc)
                 comc=abs(comc-ans)
-                ans=abs(comc-ans)
+                num=abs(num-ans)
                 print("The answer was",end='')
                 print(ans)
-                if comc==ans:
+                if comc==num:
                     print("Nothing happens.")
-                elif comc>ans:
+                elif comc<num:
                     print("No chance of critical hit")
                     crichance[i]=0
                 else:
@@ -117,8 +118,8 @@ def multiplayer():
             person=1
             for i in range(playernumber):
                 if(playerhealth[i]<=0):
-                    print("In this round, Player ",end='')
-                    print(i+1,end=" died.\n")
+                    print("Player ",end='')
+                    print(i+1,end=" is dead.\n")
                     sta.append(i+1)
                     if First==True:
                         peopleAlive=True
@@ -131,14 +132,9 @@ def multiplayer():
                 done=True
                 sta.append(person+1)
                 break
-    places=["FIRST PLACE","SECOND PLACE","THIRD PLACE","THANKS FOR PLAYING",""]
     for i in range(playernumber):
-        j=playernumber-i-1
-        if i==playernumber-1:
-            print("THANKS FOR PLAYING: ",end="Player ")
-        else:
-            print(places[i],end="Player ")
-        print(sta[j])
+        if playerhealth[i+1]>0:
+            print("Player "+str(i)+" wins!")
 def singlePlayer(dchancperc):
     global coins
     global dchance
